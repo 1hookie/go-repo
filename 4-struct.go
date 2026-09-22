@@ -2,29 +2,37 @@ package main
 
 import "fmt"
 
-type User struct {
-	ID   int
-	Name string
-	Age  int
+type Task struct {
+	ID        int
+	Title     string
+	Completed bool
 }
 
-func (u User) IsAdult() bool {
-	return u.Age >= 18
+func (t Task) Status() string {
+	if t.Completed == true {
+		return "выполнена"
+	}
+	return "не выполнена"
 }
 
-func (u *User) Birthday() {
-	u.Age++
+func (t *Task) Complete() {
+	t.Completed = true
 }
 
 func main() {
-	user := User{
-		ID:   1,
-		Name: "Step",
-		Age:  20,
+	task1 := Task{
+		ID:        1,
+		Title:     "Инициализация",
+		Completed: false,
 	}
+	task2 := Task{
+		ID:        2,
+		Title:     "Структуризация",
+		Completed: true,
+	}
+	fmt.Println("Task1 ", task1.Status())
+	task1.Complete()
+	fmt.Println("Task1 ", task1.Status())
+	fmt.Println("Task2 ", task2.Status())
 
-	fmt.Println(user.Name)
-	fmt.Println(user.IsAdult())
-	user.Birthday()
-	fmt.Println(user.Age)
 }
