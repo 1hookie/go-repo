@@ -5,6 +5,9 @@ import (
 	"fmt"
 )
 
+var ErrInvalidTaskID = errors.New("ID задачи должен быть больше нуля")
+var ErrEmptyTaskTitle = errors.New("название задачи не должно быть пустым")
+
 type Task struct {
 	ID        int
 	Title     string
@@ -12,9 +15,13 @@ type Task struct {
 }
 
 func createTask(id int, title string) (Task, error) {
-	if id <= 0 || title == "" {
-		return Task{}, errors.New("ID должен быть > 0 и название не должно быть пустым")
+	if id <= 0 {
+		return Task{}, ErrInvalidTaskID
 	}
+	if title == "" {
+		return Task{}, ErrEmptyTaskTitle
+	}
+
 	return Task{ID: id, Title: title, Completed: false}, nil
 }
 
