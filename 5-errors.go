@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 )
 
 var ErrInvalidTaskID = errors.New("ID задачи должен быть больше нуля")
@@ -25,33 +24,33 @@ func createTask(id int, title string) (Task, error) {
 	return Task{ID: id, Title: title, Completed: false}, nil
 }
 
-func main() {
-	task, err := createTask(1, "Изучить ошибки в GoLang")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(task)
-	}
+// func main() {
+// 	task, err := createTask(1, "Изучить ошибки в GoLang")
+// 	if err != nil {
+// 		fmt.Println("Ошибка:", err)
+// 	} else {
+// 		fmt.Println(task)
+// 	}
 
-	task, err = createTask(2, "Закрепить тему Errors в GoLang")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(task)
-	}
+// 	task, err = createTask(2, "Закрепить тему Errors в GoLang")
+// 	if err != nil {
+// 		fmt.Println("Ошибка:", err)
+// 	} else {
+// 		fmt.Println(task)
+// 	}
 
-	task, err = createTask(0, "Проверить обработчик ошибки 0-го айди")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(task)
-	}
+// 	task, err = createTask(0, "Проверить обработчик ошибки 0-го айди")
+// 	if err != nil {
+// 		fmt.Println("Ошибка:", err)
+// 	} else {
+// 		fmt.Println(task)
+// 	}
 
-	//Проверить обработчик ошибки пустого названия
-	task, err = createTask(4, "")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(task)
-	}
-}
+// 	//Проверить обработчик ошибки пустого названия
+// 	task, err = createTask(4, "")
+// 	if err != nil {
+// 		fmt.Println("Ошибка:", err)
+// 	} else {
+// 		fmt.Println(task)
+// 	}
+// }

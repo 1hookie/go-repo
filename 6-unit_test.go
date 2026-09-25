@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestCreateTaskSuccess(t *testing.T) {
 	task, err := createTask(1, "Изучить тесты")
@@ -53,7 +56,7 @@ func TestCreateTaskInvalidInput(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			_, err := createTask(tt.id, tt.title)
 
-			if err != tt.wantErr {
+			if !errors.Is(err, tt.wantErr) {
 				t.Errorf("ошибка = %q, ожидали %v", err, tt.wantErr)
 			}
 		})
