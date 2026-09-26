@@ -6,6 +6,11 @@ package main
 // 	return fmt.Sprintf("Привет, %s! Тебе %d лет.", name, age)
 // }
 
+// func hello(name string){
+//   return fmt.Sprintf("Hello, %s", name)
+//}
+
+
 // func isAdult(age int) bool {
 // 	return age >= 18
 // }
