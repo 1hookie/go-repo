@@ -28,8 +28,8 @@ package main
 // 	fmt.Println(greet(joeName, joeAge))
 // 	fmt.Println(isAdult(joeAge))
 
-// 	fmt.Print(max(17, 19))
-
+// 	fmt.Println(max(17, 19))
+//  fmt.Println("Hello, Go!")
 // 	var symbol rune = 's'
 // 	fmt.Println(symbol)
 //}
