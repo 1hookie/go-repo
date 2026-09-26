@@ -57,7 +57,7 @@ func TestCreateTaskInvalidInput(t *testing.T) {
 			_, err := createTask(tt.id, tt.title)
 
 			if !errors.Is(err, tt.wantErr) {
-				t.Errorf("ошибка = %q, ожидали %v", err, tt.wantErr)
+				t.Errorf("ошибка = %v, ожидали %v", err, tt.wantErr)
 			}
 		})
 	}
