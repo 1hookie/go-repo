@@ -21,7 +21,3 @@ func addTask(tasks []Task, id int, title string) ([]Task, error) {
 	tasks = append(tasks, task)
 	return tasks, nil
 }
-
-func main() {
-	fmt.Println("Hello, Go!")
-}
