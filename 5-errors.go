@@ -13,17 +13,6 @@ type Task struct {
 	Completed bool
 }
 
-func createTask(id int, title string) (Task, error) {
-	if id <= 0 {
-		return Task{}, ErrInvalidTaskID
-	}
-	if title == "" {
-		return Task{}, ErrEmptyTaskTitle
-	}
-
-	return Task{ID: id, Title: title, Completed: false}, nil
-}
-
 // func main() {
 // 	task, err := createTask(1, "Изучить ошибки в GoLang")
 // 	if err != nil {
