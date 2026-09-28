@@ -1,4 +1,4 @@
-package main
+package task
 
 import (
 	"errors"
@@ -6,7 +6,7 @@ import (
 )
 
 func TestCreateTaskSuccess(t *testing.T) {
-	task, err := createTask(1, "Изучить тесты")
+	task, err := CreateTask(1, "Изучить тесты")
 
 	if err != nil {
 		t.Fatalf("не ожидали ошибку, получили: %v", err)
@@ -27,7 +27,7 @@ func TestCreateTaskSuccess(t *testing.T) {
 
 func TestAddTaskSuccess(t *testing.T) {
 	tasks := []Task{}
-	result, err := addTask(tasks, 1, "Buy a token")
+	result, err := AddTask(tasks, 1, "Buy a token")
 
 	if err != nil {
 		t.Fatalf("не ожидали ошибку, получили: %v", err)
@@ -73,7 +73,7 @@ func TestAddTaskInvalidInput(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result, err := addTask([]Task{}, tt.id, tt.title)
+			result, err := AddTask([]Task{}, tt.id, tt.title)
 			if !errors.Is(err, tt.wantErr) {
 				t.Errorf("ошибка = %v, ожидали %v", err, tt.wantErr)
 			}
@@ -85,41 +85,41 @@ func TestAddTaskInvalidInput(t *testing.T) {
 	}
 }
 
-// func TestCreateTaskInvalidInput(t *testing.T) {
-// 	tests := []struct {
-// 		name    string
-// 		id      int
-// 		title   string
-// 		wantErr error
-// 	}{
-// 		{
-// 			name:    "нулевой ID",
-// 			id:      0,
-// 			title:   "задача",
-// 			wantErr: ErrInvalidTaskID,
-// 		},
-// 		{
-// 			name:    "отрицательный ID",
-// 			id:      -1,
-// 			title:   "задача",
-// 			wantErr: ErrInvalidTaskID,
-// 		},
-// 		{
-// 			name:    "пустая задача",
-// 			id:      1,
-// 			title:   "",
-// 			wantErr: ErrEmptyTaskTitle,
-// 		},
-// 	}
+func TestCreateTaskInvalidInput(t *testing.T) {
+	tests := []struct {
+		name    string
+		id      int
+		title   string
+		wantErr error
+	}{
+		{
+			name:    "нулевой ID",
+			id:      0,
+			title:   "задача",
+			wantErr: ErrInvalidTaskID,
+		},
+		{
+			name:    "отрицательный ID",
+			id:      -1,
+			title:   "задача",
+			wantErr: ErrInvalidTaskID,
+		},
+		{
+			name:    "пустая задача",
+			id:      1,
+			title:   "",
+			wantErr: ErrEmptyTaskTitle,
+		},
+	}
 
-// 	for _, tt := range tests {
-// 		t.Run(tt.name, func(t *testing.T) {
-// 			_, err := createTask(tt.id, tt.title)
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			_, err := CreateTask(tt.id, tt.title)
 
-// 			if !errors.Is(err, tt.wantErr) {
-// 				t.Errorf("ошибка = %v, ожидали %v", err, tt.wantErr)
-// 			}
+			if !errors.Is(err, tt.wantErr) {
+				t.Errorf("ошибка = %v, ожидали %v", err, tt.wantErr)
+			}
 
-// 		})
-// 	}
-// }
+		})
+	}
+}

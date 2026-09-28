@@ -1,23 +1,37 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"learn/task"
+)
 
-func createTask(id int, title string) (Task, error) {
-	if id <= 0 {
-		return Task{}, ErrInvalidTaskID
-	}
-	if title == "" {
-		return Task{}, ErrEmptyTaskTitle
-	}
-
-	return Task{ID: id, Title: title, Completed: false}, nil
-}
-
-func addTask(tasks []Task, id int, title string) ([]Task, error) {
-	task, err := createTask(id, title)
+func main() {
+	t, err := task.CreateTask(1, "Изучить ошибки в GoLang")
 	if err != nil {
-		return tasks, fmt.Errorf("добавление задачи %d: %w", id, err)
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println(t)
 	}
-	tasks = append(tasks, task)
-	return tasks, nil
+
+	t, err = task.CreateTask(2, "Закрепить тему Errors в GoLang")
+	if err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println(t)
+	}
+
+	t, err = task.CreateTask(0, "Проверить обработчик ошибки 0-го айди")
+	if err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println(t)
+	}
+
+	//Проверить обработчик ошибки пустого названия
+	t, err = task.CreateTask(4, "")
+	if err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Println(t)
+	}
 }
