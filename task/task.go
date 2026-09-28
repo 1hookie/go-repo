@@ -33,3 +33,11 @@ func AddTask(tasks []Task, id int, title string) ([]Task, error) {
 	tasks = append(tasks, task)
 	return tasks, nil
 }
+
+func (t Task) String() string {
+	status := "не выполнена"
+	if t.Completed {
+		status = "выполнена"
+	}
+	return fmt.Sprintf("Задача #%d: %s [%s]", t.ID, t.Title, status)
+}
