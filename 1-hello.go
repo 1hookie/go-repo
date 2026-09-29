@@ -21,6 +21,13 @@ package main
 // 	return b
 // }
 
+//func equals(a, b int) bool {
+// 	if a == b {
+// 		return true
+// 	}
+// 	return false
+// }
+
 // func min(a, b int) int {
 // 	if a < b {
 // 		return a
