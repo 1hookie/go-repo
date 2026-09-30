@@ -2,36 +2,18 @@ package main
 
 import (
 	"fmt"
-	"learn/task"
+	"net/http"
 )
 
 func main() {
-	t, err := task.CreateTask(1, "Изучить ошибки в GoLang")
+	http.HandleFunc("/tasks/example", exampleTaskHandler)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(t)
+		fmt.Println("Ошибка запуска сервера: ", err)
 	}
-
-	t, err = task.CreateTask(2, "Закрепить тему Errors в GoLang")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(t)
-	}
-
-	t, err = task.CreateTask(0, "Проверить обработчик ошибки 0-го айди")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(t)
-	}
-
-	//Проверить обработчик ошибки пустого названия
-	t, err = task.CreateTask(4, "")
-	if err != nil {
-		fmt.Println("Ошибка:", err)
-	} else {
-		fmt.Println(t)
-	}
+	//http.HandleFunc("/health", healthHandler)
+	//err := http.ListenAndServe(":8080", nil)
+	//if err != nil {
+	//	fmt.Println("Ошибка запуска сервера: ", err)
+	//}
 }

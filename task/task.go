@@ -9,9 +9,9 @@ var ErrInvalidTaskID = errors.New("ID задачи должен быть бол�
 var ErrEmptyTaskTitle = errors.New("название задачи не должно быть пустым")
 
 type Task struct {
-	ID        int
-	Title     string
-	Completed bool
+	ID        int    `json:"id"`
+	Title     string `json:"title"`
+	Completed bool   `json:"completed"`
 }
 
 func CreateTask(id int, title string) (Task, error) {
