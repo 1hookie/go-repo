@@ -43,6 +43,25 @@ func createTaskHandler(w http.ResponseWriter, r *http.Request) {
 		Title string `json:"title"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
-		log.Println("Ошибка декодирования JSON:", err)
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
 	}
+
+	id := len(tasks) + 1
+	updated, err := task.AddTask(tasks, id, input.Title)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	tasks = updated
+	w.WriteHeader(http.StatusCreated)
+	if err := json.NewEncoder(w).Encode(tasks[len(tasks)-1]); err != nil {
+		log.Println("Ошибка кодирования JSON:", err)
+	}
+
 }
+
+//curl -i -X POST http://localhost:8080/tasks -d '{"title":"Купить хлеб"}'
+//curl -i http://localhost:8080/tasks
+//curl -i -X POST http://localhost:8080/tasks -d '{"title":""}'
+//curl -i -X POST http://localhost:8080/tasks -d 'не json'
