@@ -58,8 +58,8 @@ go version
 ### Клонирование репозитория
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
+git clone https://github.com/1hookie/go-repo.git
+cd go-repo
 ```
 
 ### Запуск программы
