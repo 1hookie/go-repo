@@ -6,6 +6,7 @@ import (
 	"learn/task"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 var tasks = []task.Task{
@@ -58,10 +59,25 @@ func createTaskHandler(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(w).Encode(tasks[len(tasks)-1]); err != nil {
 		log.Println("Ошибка кодирования JSON:", err)
 	}
+}
+
+func getTaskHandler(w http.ResponseWriter, r *http.Request) {
+	idStr := r.PathValue("id")
+	id, err := strconv.Atoi(idStr)
+	if err != nil {
+		http.Error(w, "некорректный ID", http.StatusBadRequest)
+		return
+	}
+	for _, t := range tasks {
+		if t.ID == id {
+			w.Header().Set("Content-Type", "application/json")
+			if err := json.NewEncoder(w).Encode(t); err != nil {
+				log.Println("ошибка кодирования JSON:", err)
+			}
+			return
+		}
+	}
+	http.Error(w, "задача не найдена", http.StatusNotFound)
 
 }
 
-//curl -i -X POST http://localhost:8080/tasks -d '{"title":"Купить хлеб"}'
-//curl -i http://localhost:8080/tasks
-//curl -i -X POST http://localhost:8080/tasks -d '{"title":""}'
-//curl -i -X POST http://localhost:8080/tasks -d 'не json'
