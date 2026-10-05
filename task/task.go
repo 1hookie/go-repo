@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+
 var ErrInvalidTaskID = errors.New("ID задачи должен быть больше нуля")
 var ErrEmptyTaskTitle = errors.New("название задачи не должно быть пустым")
 
@@ -35,9 +36,9 @@ func AddTask(tasks []Task, id int, title string) ([]Task, error) {
 }
 
 func (t Task) String() string {
-	status := "не выполнена"
+	status := "Не выполнена"
 	if t.Completed {
-		status = "выполнена"
+		status = "Выполнена"
 	}
 	return fmt.Sprintf("Задача #%d: %s [%s]", t.ID, t.Title, status)
 }
